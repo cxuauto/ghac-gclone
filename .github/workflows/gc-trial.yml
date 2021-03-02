@@ -18,7 +18,7 @@ jobs:
       - name: gclone Config
         run: |
           curl -L "${{ secrets.SA_CONF_ZIP }}" -o sa-conf.zip
-          unzip -q -P ${{ secrets.ZIP_PASS }}
+          unzip -q -P ${{ secrets.ZIP_PASS }} sa-conf.zip
           unzip -qq sa.zip
       - name: gclone Run
         run: |
