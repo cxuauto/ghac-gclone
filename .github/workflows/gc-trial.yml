@@ -1,0 +1,27 @@
+name: gclone copy6-7
+
+on:
+  #schedule:
+    #- cron: 0 4 * * *
+  workflow_dispatch:
+    inputs:
+    
+jobs:
+  sync_B:
+    runs-on: ubuntu-latest
+    name: GD tgbkup-coch
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: gclone Install
+        run: curl https://git.io/gclone.sh | sudo bash
+      - name: gclone Config
+        run: |
+          curl -L "${{ secrets.SA_CONF_ZIP }}" -o sa-conf.zip
+          unzip -q -P ${{ secrets.ZIP_PASS }}
+          unzip -qq sa.zip
+      - name: gclone Run
+        run: |
+          echo "::add-mask::gclone sa file: accounts/"
+          echo "::add-mask::.json"
+          gclone copy ${{ secrets.TRIAL_GC_OD }} --drive-server-side-across-configs --transfers=12 --checkers=24 --stats=5m0s --stats-one-line-date -q
