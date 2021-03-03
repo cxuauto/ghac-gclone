@@ -1,8 +1,8 @@
-name: odgd 1
+name: odgd 3
 
 on:
   schedule:
-    - cron: 0 0/6 * * *
+    - cron: 0 2/6 * * *
   workflow_dispatch:
     inputs:
     
