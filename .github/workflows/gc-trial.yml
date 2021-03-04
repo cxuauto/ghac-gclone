@@ -30,4 +30,4 @@ jobs:
           echo "::add-mask::gclone sa file: accounts/"
           echo "::add-mask::.json"
           gclone copy --config ./conf-od2021.txt ${{ secrets.TRIAL_GC_OD }} --drive-server-side-across-configs --drive-acknowledge-abuse \
-          --transfers=16 --checkers=32 --stats=5m0s --stats-one-line-date --stats-log-level NOTICE
+          --transfers=16 --checkers=32 --stats=5m0s --stats-one-line-date --stats-log-level NOTICE --ignore-checksum --ignore-size
