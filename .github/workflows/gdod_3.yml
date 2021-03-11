@@ -27,7 +27,8 @@ jobs:
           unzip -qq sa.zip
       - name: gclone Run
         run: |
-          echo "::add-mask::gclone sa file: accounts/*"
-          echo "::add-mask::.*.json"
+          echo "::add-mask::gclone sa file: accounts/"
+          echo "::add-mask::.json"
+          gclone listremotes
           gclone copy --config ./conf-od2021.txt ${{ secrets.GDOD_3 }} --drive-server-side-across-configs --drive-acknowledge-abuse \
           --transfers=16 --checkers=32 --stats=5m0s --stats-one-line-date --stats-log-level NOTICE --ignore-checksum --ignore-size
