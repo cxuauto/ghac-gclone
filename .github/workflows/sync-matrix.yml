@@ -1,4 +1,4 @@
-name: odgd 4
+name: syncs
 
 on:
   schedule:
