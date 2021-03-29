@@ -19,7 +19,7 @@ jobs:
             fromto: SY3
               
     runs-on: ubuntu-latest
-    name: ${{maxtrix.name}}
+    name: ${{matrix.name}}
 
     steps:
       - uses: actions/checkout@v2
