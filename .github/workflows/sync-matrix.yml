@@ -1,0 +1,44 @@
+name: odgd 4
+
+on:
+  schedule:
+    - cron: 30 5/6 * * *
+  workflow_dispatch:
+    inputs:
+    
+jobs:
+  sync:
+    strategy:
+      matrix:
+        include:
+          - name: "sync virmnt"
+            fromto: SY1
+          - name: "sync recv"
+            fromto: SY2
+          - name: "saved"
+            fromto: SY3
+              
+    runs-on: ubuntu-latest
+    name: ${{maxtrix.name}}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: gclone Install
+        run: |
+          wget -qO- https://api.github.com/repos/donwa/gclone/releases/latest \
+          | grep browser_download_url | grep Linux_x86_64 | cut -d '"' -f 4 \
+          | wget --no-verbose -i- -O- | gzip -d -c > gclone
+          sudo mv gclone /usr/bin
+          sudo chmod +x /usr/bin/gclone
+      - name: gclone Config
+        run: |
+          curl -L "${{ secrets.SA_CONF_ZIP }}" -o sa-conf.zip
+          unzip -q -P ${{ secrets.ZIP_PASS }} sa-conf.zip
+          unzip -qq sa.zip
+      - name: gclone Run
+        run: |
+          echo "::add-mask::gclone sa file: accounts/"
+          echo "::add-mask::.json"
+          gclone sync --config ./conf-od2021.txt ${{ secrets[matrix.fromto] }} --drive-server-side-across-configs --drive-acknowledge-abuse \
+          --transfers 8  --cache-chunk-size 20M  --bwlimit 120M --max-size 250G \
+          --stats=2m0s --stats-one-line-date --stats-log-level NOTICE --ignore-checksum --ignore-size
