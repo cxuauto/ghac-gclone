@@ -2,7 +2,7 @@ name: syncs
 
 on:
   schedule:
-    - cron: 30 5/6 * * *
+    - cron: 30 4/6 * * *
   workflow_dispatch:
     inputs:
     
