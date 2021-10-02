@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "::add-mask::gclone sa file: accounts/"
           echo "::add-mask::.json"
-          gclone sync --config ./conf-od2021.txt ${{ secrets[matrix.fromto] }} --drive-server-side-across-configs --drive-acknowledge-abuse \
+          gclone copy --config ./conf-od2021.txt ${{ secrets[matrix.fromto] }} --drive-server-side-across-configs --drive-acknowledge-abuse \
           --transfers 8  --cache-chunk-size 20M  --bwlimit 120M --max-size 250G \
           --stats=2m0s --stats-one-line-date --stats-log-level NOTICE --ignore-checksum --ignore-size \
           || echo end with error
