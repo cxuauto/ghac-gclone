@@ -8,3 +8,5 @@ https://github.com/HEYANG1995/Action-Rclone/blob/master/.github/workflows/gclone
 https://github.com/artxia/Action-Rclone/blob/master/.github/workflows/onedrive_sync.yml
 
 OD 政策研究 https://omo.moe/archives/836/
+
+2021-11-22 听说 ltu 也要清理门户了 唉
